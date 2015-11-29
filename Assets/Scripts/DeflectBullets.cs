@@ -8,7 +8,6 @@ public class DeflectBullets : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		bulletScript = GameObject.Find("Bullet").GetComponent<BulletScript>();
-		Debug.Log(bulletScript);
 	}
 
 	// If the bullet collides with the lightsaber, deflect the bullet
