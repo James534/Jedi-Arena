@@ -5,7 +5,7 @@ public class Networking : Photon.MonoBehaviour
 {
 
     int counter = 0;
-    Vector3[] pos = { new Vector3(7.5f, 0, 7.5f), new Vector3(7.5f, 0, -7.5f), new Vector3(-7.5f, 0, 7.5f), new Vector3(-7.5f, 0, -7.5f)};
+    Vector3[] pos = { new Vector3(7.5f, 1, 7.5f), new Vector3(7.5f, 1, -7.5f), new Vector3(-7.5f, 1, 7.5f), new Vector3(-7.5f, 1, -7.5f)};
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings("jedi");
