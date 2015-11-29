@@ -12,10 +12,8 @@ public class PlayerScript : Photon.MonoBehaviour {
 	void Start() {
 		rb = GetComponent<Rigidbody>();
 		count = 0;
-		//updateScore();
-		//winText.text = "";
 	}
-
+    
 	void Update() {
         if (photonView.isMine)
         {
@@ -31,19 +29,18 @@ public class PlayerScript : Photon.MonoBehaviour {
                 rb.MovePosition(rb.position - Vector3.right * Time.deltaTime);
         }
     }
-    /*
-	void OnTriggerEnter(Collider other) {
-		if(other.gameObject.CompareTag("Pick Up")) {
-			other.gameObject.SetActive(false);
-			count += 1;
-			updateScore();
-		}
-	}
 
-	void updateScore() {
-		countText.text = "Score: " + count.ToString ();
-		if (count >= 10) {
-			winText.text = "You win!";
-		}
-	}*/
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+        if (stream.isWriting)
+        {
+            stream.SendNext(rb.position);
+            stream.SendNext(rb.rotation);
+        }
+        else
+        {
+            rb.position = (Vector3) stream.ReceiveNext();
+            rb.rotation = (Quaternion)stream.ReceiveNext();
+        }
+    }
+        
 }
