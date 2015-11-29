@@ -13,7 +13,7 @@ public class DeflectBullets : MonoBehaviour {
 	// If the bullet collides with the lightsaber, deflect the bullet
 	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.CompareTag("Bullet")) {
-			bulletScript.speed = -1.0f;
+			Destroy(other.gameObject);
 		}
 	}
 }

@@ -3,23 +3,24 @@ using System.Collections;
 
 public class ShootBullets : MonoBehaviour {
 
+	GameObject bullet;
+	float timer = 300;
+	
 	// Use this for initialization
 	void Start () {
-	
+		bullet = GameObject.Find("Bullet");
 	}
-	
+
 	void Update() {
+		timer -= 100;
+		if (timer < 0) {
+		
+			GameObject g = (GameObject)Instantiate(bullet,
+			                                       new Vector3(0,1f,0),
+			                                       Quaternion.Euler(0, Random.Range(0, 360), 5.0f));
+			timer = 300;
+		}
 		if (Input.GetMouseButtonDown (0)) {
-//			GameObject FPSController = GameObject.Find("FPSController");
-//			Debug.Log(Mathf.Asin(transform.parent.rotation.y));
-			GameObject bullet = GameObject.Find("Bullet");
-//			bullet.transform.rotation.Set(0, 180, 0, 0);
-//			bullet.transform.position.Set(
-//			float correctedY = transform.parent.rotation.y - 0.5f;
-//			if(transform.parent.rotation.y - 0.5f < -1.0f) {
-//				correctedY = -1.0f - transform.parent.rotation.y;
-//				Debug.Log(correctedY);
-//			}
 			GameObject g = (GameObject)Instantiate(bullet,
 			                                       transform.position,
 			                                       new Quaternion(transform.parent.rotation.x-90f,
