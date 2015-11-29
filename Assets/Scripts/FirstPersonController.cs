@@ -3,9 +3,11 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
+using WiimoteApi;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
+
     [RequireComponent(typeof (CharacterController))]
     [RequireComponent(typeof (AudioSource))]
     public class FirstPersonController : MonoBehaviour
@@ -41,6 +43,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        Wiimote wm;
 
         // Use this for initialization
         private void Start()
@@ -55,33 +58,43 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+            WiimoteManager.FindWiimotes(); // Poll native bluetooth drivers to find Wiimotes
+            foreach (Wiimote remote in WiimoteManager.Wiimotes)
+            {
+                Debug.Log("Found Wiimote");
+                wm = remote;
+            }
+            wm.SendPlayerLED(true, false, false, false);
+            wm.SendDataReportMode(InputDataType.REPORT_BUTTONS_EXT8);
         }
 
 
         // Update is called once per frame
         private void Update()
         {
-            RotateView();
-            // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump)
-            {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-            }
+                /*
+                RotateView();
+                // the jump state needs to read here to make sure it is not missed
+                if (!m_Jump)
+                {
+                    m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                }
 
-            if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
-            {
-                StartCoroutine(m_JumpBob.DoBobCycle());
-                PlayLandingSound();
-                m_MoveDir.y = 0f;
-                m_Jumping = false;
-            }
-            if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
-            {
-                m_MoveDir.y = 0f;
-            }
+                if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
+                {
+                    StartCoroutine(m_JumpBob.DoBobCycle());
+                    PlayLandingSound();
+                    m_MoveDir.y = 0f;
+                    m_Jumping = false;
+                }
+                if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
+                {
+                    m_MoveDir.y = 0f;
+                }
 
-            m_PreviouslyGrounded = m_CharacterController.isGrounded;
-        }
+                m_PreviouslyGrounded = m_CharacterController.isGrounded;*/
+            }
 
 
         private void PlayLandingSound()
@@ -90,8 +103,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource.Play();
             m_NextStep = m_StepCycle + .5f;
         }
-
-
+        
         private void FixedUpdate()
         {
             float speed;
@@ -202,8 +214,27 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void GetInput(out float speed)
         {
             // Read input
-            float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-            float vertical = CrossPlatformInputManager.GetAxis("Vertical");
+            float horizontal=0, vertical=0;
+            int ret;
+            do
+            {
+                ret = wm.ReadWiimoteData();
+            } while (ret > 0);
+
+            if (wm.current_ext == ExtensionController.NUNCHUCK)
+            {
+                NunchuckData nd = wm.Nunchuck;
+                float[] pos = nd.GetStick01();
+                //Debug.Log(pos[0] + " " + pos[1]);
+                if (Mathf.Abs(pos[0] - 0.46f) > 0.05)
+                {
+                    horizontal = pos[0] - 0.46f;
+                }
+                if (Mathf.Abs(pos[1] - 0.55f) > 0.05)
+                {
+                    vertical = pos[1] - 0.55f;
+                }
+            }
 
             bool waswalking = m_IsWalking;
 
@@ -234,7 +265,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+            //m_MouseLook.LookRotation (transform, m_Camera.transform);
+
         }
 
 
