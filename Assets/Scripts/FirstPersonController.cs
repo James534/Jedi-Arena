@@ -220,15 +220,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 ret = wm.ReadWiimoteData();
             } while (ret > 0);
-
+            
             if (wm.current_ext == ExtensionController.NUNCHUCK)
             {
                 NunchuckData nd = wm.Nunchuck;
                 float[] pos = nd.GetStick01();
                 //Debug.Log(pos[0] + " " + pos[1]);
+                
                 if (Mathf.Abs(pos[0] - 0.46f) > 0.05)
                 {
-                    horizontal = pos[0] - 0.46f;
+                        horizontal = pos[0] - 0.46f;
                 }
                 if (Mathf.Abs(pos[1] - 0.55f) > 0.05)
                 {
