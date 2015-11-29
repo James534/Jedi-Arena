@@ -22,7 +22,10 @@ public class ShootBullets : MonoBehaviour {
 //			}
 			GameObject g = (GameObject)Instantiate(bullet,
 			                                       transform.position,
-			                                       transform.parent.rotation);
+			                                       new Quaternion(transform.parent.rotation.x-90f,
+                                                   transform.parent.rotation.y,
+                                                   transform.parent.rotation.z,
+                                                   transform.parent.rotation.w));
 		}
 	}
 }
