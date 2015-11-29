@@ -75,6 +75,11 @@ public class PlayerScript : Photon.MonoBehaviour {
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+        if (rb == null)
+        {
+            Debug.Log("PICNIC");
+            return;
+        }
         if (stream.isWriting)
         {
             stream.SendNext(rb.position);

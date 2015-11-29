@@ -5,6 +5,7 @@ public class Networking : Photon.MonoBehaviour
 {
 
     int counter = 0;
+    Vector3[] pos = { new Vector3(7.5f, 0, 7.5f), new Vector3(7.5f, 0, -7.5f), new Vector3(-7.5f, 0, 7.5f), new Vector3(-7.5f, 0, -7.5f)};
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings("jedi");
@@ -28,17 +29,7 @@ public class Networking : Photon.MonoBehaviour
 
     void OnJoinedRoom()
     {
-        Vector3 pos;
-        if (counter == 0)
-        {
-             pos = new Vector3(5, 0, 5);
-        }
-        else
-        {
-            pos = new Vector3(-5, 0, -5);
-        }
-
-        GameObject player = PhotonNetwork.Instantiate("HitBox", pos, Quaternion.identity, 0);
+        GameObject player = PhotonNetwork.Instantiate("HitBox", pos[Random.Range(0,4)], Quaternion.identity, 0);
 
         counter++;
         Debug.Log("Joined Room and Created Object");
