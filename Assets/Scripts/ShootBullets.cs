@@ -16,10 +16,9 @@ public class ShootBullets : MonoBehaviour {
 		if (timer < 0) {
 		
 			GameObject g = (GameObject)Instantiate(bullet,
-			                                       new Vector3(0,Random.Range(0, 3),0),
+			                                       new Vector3(0,1f,0),
 			                                       Quaternion.Euler(0, Random.Range(0, 360), 5.0f));
 			timer = 300;
-			Debug.Log("Added bullet");
 		}
 		if (Input.GetMouseButtonDown (0)) {
 			GameObject g = (GameObject)Instantiate(bullet,
