@@ -45,6 +45,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BulletCollide.cs" />
      <Compile Include="Assets\ModifyXRot.cs" />
      <Compile Include="Assets\Myo Samples\Scripts\ColorBoxByPose.cs" />
      <Compile Include="Assets\Myo Samples\Scripts\JointOrientation.cs" />
@@ -69,9 +70,24 @@
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\RigidbodyFirstPersonController.cs" />
      <Compile Include="Assets\Scripts\Rotator.cs" />
+     <Compile Include="Assets\VolumetricLines\ExampleScenes\ExampleScripts\CannonBehavior.cs" />
+     <Compile Include="Assets\VolumetricLines\ExampleScenes\ExampleScripts\CreateSinShapedLineStrip.cs" />
+     <Compile Include="Assets\VolumetricLines\ExampleScenes\ExampleScripts\ShotBehavior.cs" />
+     <Compile Include="Assets\VolumetricLines\Scripts\SetFovGlobalShaderVariable.cs" />
+     <Compile Include="Assets\VolumetricLines\Scripts\Utils\ExposePropertyAttribute.cs" />
+     <Compile Include="Assets\VolumetricLines\Scripts\Utils\TransformExtensionMethods.cs" />
+     <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineBehavior.cs" />
+     <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineStripBehavior.cs" />
+     <Compile Include="Assets\VolumetricLines\Scripts\VolumetricMultiLineBehavior.cs" />
+     <None Include="Assets\VolumetricLines\Shaders\VolumetricLineShaderAlphaBlended.shader" />
+     <None Include="Assets\VolumetricLines\Shaders\VolumetricLineShaderAdditive.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+     <None Include="Assets\VolumetricLines\Shaders\VolumetricLineShaderAdditiveFast.shader" />
      <None Include="Assets\Myo\README-MyoUnity.txt" />
+     <None Include="Assets\VolumetricLines\Shaders\VolumetricLineStripShaderAdditive.shader" />
      <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
+     <None Include="Assets\VolumetricLines\Shaders\VolumetricLineStripShaderAlphaBlended.shader" />
+     <None Include="Assets\VolumetricLines\Shaders\VolumetricLineShaderAlphaBlendedFast.shader" />
      <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
