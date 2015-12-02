@@ -1,0 +1,1 @@
+With the upcoming starwars movie, we were inspired to create everyone's childhood dream of slicing people in half with lightsabers. Using the power of the oculus rift and Myo armband, we decided to make an online arena for this exact purpose. Slice, dice and chop the heads off of your enemies! Jedi Arena - the game of the century.
